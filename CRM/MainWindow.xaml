@@ -3,10 +3,87 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CRM"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+         Height="783" Width="1200" Background="#F9FAFB">
 
+    <Grid Margin="0,0,0,24">
+        <Border Background="#FFFFFF" CornerRadius="25" Width="200" HorizontalAlignment="Left" Margin="20,56,0,-5">
+
+
+            <!-- Aplicando el efecto de sombra -->
+            <Border.Effect>
+                <DropShadowEffect Color="Gray" Direction="270" BlurRadius="10" ShadowDepth="5"/>
+            </Border.Effect>
+
+            <StackPanel Margin="10,34,10,-146">
+                
+                
+                <Button Content="Clientes" HorizontalAlignment="Center" Padding="10" Margin="0,5,0,0" Background="#6C63FF" Foreground="#FFFFFF" Width="166" BorderBrush="White" />
+                <Button Content="Ingresos" HorizontalAlignment="Center" Padding="10" Margin="0,5,0,0" Background="Transparent" Width="166" BorderBrush="White"/>
+                <Button Content="Promocionar" HorizontalAlignment="Center" Padding="10" Margin="0,5,0,0" Background="Transparent" Width="166" BorderBrush="White"/>
+               
+            </StackPanel>
+        </Border>
+
+        <!-- Main Content -->
+        <Grid Margin="240,20,20,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="239*"/>
+                <ColumnDefinition Width="701*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" Margin="10,10,0,87" Grid.ColumnSpan="2">
+                <!-- Title -->
+                <TextBlock FontSize="24" FontWeight="Bold" Margin="0,0,0,10"><Run Language="es-419" Text="Lista de Clientes"/></TextBlock>
+                <TextBlock FontSize="16" Foreground="#22C55E" Margin="0,0,0,20" ><Run Language="es-419" Text="Clientes Activos"/></TextBlock>
+                <DockPanel LastChildFill="True">
+
+
+                    <TextBox Width="300" Height="35" DockPanel.Dock="Left" Margin="0,0,10,0" Background="#FFFFFF"   />
+                    <ComboBox Width="150" Height="35" Background="#FFFFFF" SelectedIndex="0" HorizontalAlignment="Right">
+                        <ComboBoxItem Content="Newest" />
+                        <ComboBoxItem Content="Oldest" />
+                    </ComboBox>
+                </DockPanel>
+
+                <!-- Search and Sorting -->
+            </StackPanel>
+
+            <!-- Data Grid -->
+            <Border Background="#FFFFFF" CornerRadius="20" Padding="10" Margin="10,143,0,82" Grid.ColumnSpan="2">
+
+                <Border.Effect>
+                    <DropShadowEffect Color="Gray" Direction="270" BlurRadius="10" ShadowDepth="5"/>
+                </Border.Effect>
+
+                <DataGrid AutoGenerateColumns="False" HeadersVisibility="Column" Background="#FFFFFF" BorderThickness="0" RowHeight="40" FontSize="14" CanUserAddRows="False" Height="444" VerticalAlignment="Center" SelectionChanged="DataGrid_SelectionChanged" Margin="14,0,14,0">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nombre del Cliente" Binding="{Binding Name}" Width="*" />
+                        <DataGridTextColumn Header="Compañía" Binding="{Binding Company}" Width="*" />
+                        <DataGridTextColumn Header="Numero Telefónico" Binding="{Binding PhoneNumber}" Width="*" />
+                        <DataGridTextColumn Header="Correo Eletrónico" Binding="{Binding Email}" Width="*" />
+                        <DataGridTextColumn Header="Provincia" Binding="{Binding Country}" Width="*" />
+                        <DataGridTemplateColumn Header="Estado" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border Background="{Binding StatusColor}" Padding="5,2" HorizontalAlignment="Center" CornerRadius="5">
+                                        <TextBlock Text="{Binding Status}" Foreground="#FFFFFF" />
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+
+            <!-- Pagination -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="427,641,0,-15" Width="274" Grid.Column="1">
+                <Button Content="1" Width="40" Height="40" Background="#6C63FF" Foreground="#FFFFFF" Margin="5"/>
+                <Button Content="2" Width="40" Height="40" Background="#FFFFFF" Margin="5"  />
+                <Button Content="3" Width="40" Height="40" Background="#FFFFFF" Margin="5"  />
+                <Button Content="..." Width="40" Height="40" Background="#FFFFFF" Margin="5"  />
+                <Button Content="40" Width="40" Height="40" Background="#FFFFFF" Margin="5"  />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
